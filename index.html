@@ -10,13 +10,24 @@
       display: flex;
     }
     #sidebar {
-      width: 200px;
+      width: auto;
       background-color: #f2f2f2;
       padding: 20px;
     }
+    .sidebar {
+      display: grid;
+      grid-template-columns: repeat(2, 0.2fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 5px;
+    }
+    .cell {
+      border: 2px dashed #000;
+      padding: 10px;
+      text-align: center;
+    }
     #canvas {
       flex: 1;
-      min-height: 300px;
+      min-height: 97vh;
       background-color: #eaeaea;
       position: relative;
     }
@@ -38,12 +49,12 @@
   <title>Workflow Editor</title>
 </head>
 <body>
-  <div id="sidebar">
-    <div class="draggable" draggable="true" data-type="start">Start Point</div>
-    <div class="draggable" draggable="true" data-type="end">End Point</div>
-    <div class="draggable" draggable="true" data-type="component">Component 1</div>
-    <div class="draggable" draggable="true" data-type="component">Component 2</div>
-    <div class="draggable" draggable="true" data-type="connector">Connector</div>
+  <div id="sidebar"class="sidebar">
+    <div class="draggable cell" draggable="true" data-type="start">Start Point</div>
+    <div class="draggable cell" draggable="true" data-type="end">End Point</div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 1</div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 2</div>
+    <div class="draggable cell" draggable="true" data-type="connector">Connector</div>
   </div>
   <div id="canvas"></div>
 
