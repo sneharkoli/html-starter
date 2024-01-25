@@ -1,43 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/59fd5cd110.js" crossorigin="anonymous"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
     }
+
     #sidebar {
       width: auto;
       background-color: #f2f2f2;
       padding: 20px;
     }
+
     .sidebar {
       display: grid;
       grid-template-columns: repeat(2, 0.2fr);
       grid-template-rows: repeat(6, 1fr);
       gap: 5px;
     }
+
     .cell {
       border: 2px dashed #000;
       padding: 10px;
       text-align: center;
     }
+
     #canvas {
       flex: 1;
       min-height: 97vh;
       background-color: #eaeaea;
       position: relative;
+      width: fit-content;
     }
+
     .draggable {
       margin-bottom: 10px;
       cursor: pointer;
     }
+
     .draggable:hover {
       background-color: #d9d9d9;
     }
+
     .connector {
       width: 100px;
       height: 20px;
@@ -45,20 +54,78 @@
       position: absolute;
       z-index: -1;
     }
+
+    .start_node {
+      position: absolute;
+      margin-left: 0.4rem;
+    }
+
+    .end_node {
+      position: absolute;
+      left: 0;
+      margin-left: -0.8rem;
+    }
+
+    .component_start_node {
+      position: absolute;
+      margin-left: 0.4rem;
+    }
+
+    .component_end_node {
+      position: absolute;
+      left: 0;
+      margin-left: -0.8rem;
+    }
+
+    .hidden-span {
+      display: none;
+    }
   </style>
   <title>Workflow Editor</title>
 </head>
+
 <body>
-  <div id="sidebar"class="sidebar">
-    <div class="draggable cell" draggable="true" data-type="start">Start Point</div>
-    <div class="draggable cell" draggable="true" data-type="end">End Point</div>
-    <div class="draggable cell" draggable="true" data-type="component">Component 1</div>
-    <div class="draggable cell" draggable="true" data-type="component">Component 2</div>
-    <div class="draggable cell" draggable="true" data-type="connector">Connector</div>
+  <div id="sidebar" class="sidebar">
+    <div class="draggable cell" draggable="true" data-type="start">Start Points
+      <span class="start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="end">End Point
+      <span class="end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell jj" draggable="true" data-type="component">Component 1
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 2
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 3
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 4
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 5
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="component">Component 6
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
+    <div class="draggable cell" draggable="true" data-type="connector">Connector
+      <span class="component_start_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+      <span class="component_end_node hidden-span"><i class="fa-brands fa-hashnode"></i></span>
+    </div>
   </div>
   <div id="canvas"></div>
 
   <script>
+    var container = document.querySelector('#canvas');
+
     const canvas = document.getElementById('canvas');
     let draggingItem = null;
 
@@ -81,7 +148,12 @@
         newItem.style.position = 'absolute';
         newItem.style.left = (e.offsetX - 50) + 'px';
         newItem.style.top = (e.offsetY - 15) + 'px';
+        newItem.childNodes.forEach((value, index, array) => value instanceof HTMLSpanElement ? value.classList.remove('hidden-span') : value)
         canvas.appendChild(newItem);
+      }
+      var span = container.querySelector('.hidden-span');
+      if (span) {
+        span.classList.remove('hidden-span');
       }
     });
 
@@ -97,5 +169,8 @@
       }
     });
   </script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>
+
 </html>
